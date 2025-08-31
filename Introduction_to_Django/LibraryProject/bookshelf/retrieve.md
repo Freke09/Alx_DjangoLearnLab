@@ -1,7 +1,6 @@
 ## Retrieve:
 ```
-for book in Book.objects.all():
-    print(book)
+Book.objects.get(title = '1984')
 
-# 1984 by George Orwell Published in 1949
+# <Book: 1984 by George Orwell Published in 1949>
 ```
