@@ -3,6 +3,6 @@ from django.http import HttpResponse
 from .models import Author, Book, Library, Librarian
 
 def list_books(request):
-    books = Book.objects.all()
-    book_list = ", ".join([book.title for book in books])
-    return HttpResponse(f"Books: {book_list}")
+    books = Book.objects.select_related("author").all()
+    context = {"books": books}
+    return render(request, "relationship_app/book_list.html", context)
