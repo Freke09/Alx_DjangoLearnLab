@@ -10,25 +10,17 @@ class BookAdmin(admin.ModelAdmin):
 
 class CustomUserAdmin(UserAdmin):
     model = CustomUser
-    list_display = ('email', 'date_of_birth', 'is_staff')
-    list_filter = ('is_staff', 'is_active')
+    
+    list_display = ('username', 'email', 'date_of_birth', 'is_staff', 'is_active')
+    list_filter = ('is_staff', 'is_active', 'date_of_birth')
 
-    fieldsets = (
-        (None, {"fields": ("email", "password")}),
-        ("Personal Info", {"fields": ("date_of_birth", "profile_photo")}),
-        ("Important dates", {"fields": ("last_login", "date_joined")}),
+    fieldsets = UserAdmin.fieldsets + (
+        ("Additional Info", {"fields": ("date_of_birth", "profile_picture")}),
     )
 
-    add_fieldsets = (
-        (None, {
-            "classes": ("wide",),
-            "fields": ("email", "password1", "password2", "is_staff", "is_active")}
-        ),
+    add_fieldsets = UserAdmin.add_fieldsets + (
+        ("Additional Info", {"fields": ("date_of_birth", "profile_picture")}),
     )
-
-    search_fields = ("email",)
-    ordering = ("email",)
-    filter_horizontal = ()
 
 
 
